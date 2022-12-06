@@ -13,13 +13,14 @@ services:
     volumes:
       - ./api:/diza/src/app
       - /diza/src/app/node_modules
+      - /diza/src/app/node_modules/bcrypt
     # RUN in debug mode: npm run start:dubug
     # Run in dev mode: npm run start:dev
     command: npm run start:dev
     depends_on:
       - postgres
     environment:
-      DATABASE_URL: postgress://user:password@postgres:5432/db
+      DATABASE_URL: postgress://service:password@postgres:5432/db
       NODE_ENV: development
       PORT: 3000
     ports:
@@ -45,7 +46,7 @@ services:
   postgres:
     image: postgres:10.4
     environment:
-      POSTGRES_USER: user
+      POSTGRES_USER: service
       POSTGRES_PASSWORD: password
       POSTGRES_DB: db
     ports:
